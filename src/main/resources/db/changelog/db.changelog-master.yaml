@@ -1,0 +1,33 @@
+databaseChangeLog:
+  - preConditions:
+      - runningAs:
+          username: guestbook
+
+  - changeSet:
+      id: 1
+      author: obee
+      changes:
+        - createTable:
+            tableName: entry
+            columns:
+              - column:
+                  name: id
+                  type: int
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: name
+                  type: varchar(100)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: message
+                  type: varchar(500)
+              - column:
+                  name: image_url
+                  type: varchar(250)
+              - column:
+                  name: created_date
+                  type: date
