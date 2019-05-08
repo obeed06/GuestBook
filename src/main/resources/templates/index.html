@@ -34,6 +34,12 @@
                         <th>Image</th>
                         <th>Date Created</th>
                         <div sec:authorize="hasRole('ROLE_ADMIN')">
+                            <th>Approve</th>
+                        </div>
+                        <div sec:authorize="hasRole('ROLE_ADMIN')">
+                            <th>Edit</th>
+                        </div>
+                        <div sec:authorize="hasRole('ROLE_ADMIN')">
                             <th>Delete</th>
                         </div>
                     </tr>
@@ -45,9 +51,18 @@
                         <td><img th:src="@{${entry.imageUrl}}"/></td>
                         <td th:text="${entry.createdDate}"></td>
                         <div sec:authorize="hasRole('ROLE_ADMIN')">
+                            <td>
+                                    <span th:if="${entry.approved}"></span>
+                                    <span th:unless="${entry.approved}"><a th:href="@{/guestbook/approve/{id}(id=${entry.id})}" class="btn btn-primary">approve</a></span>
+
+                            </td>
+                        </div>
+                        <div sec:authorize="hasRole('ROLE_ADMIN')">
+                            <td><a th:href="@{/guestbook/edit/{id}(id=${entry.id})}" class="btn btn-primary">edit</a></td>
+                        </div>
+                        <div sec:authorize="hasRole('ROLE_ADMIN')">
                             <td><a th:href="@{/guestbook/delete/{id}(id=${entry.id})}" class="btn btn-primary"><i class="fas fa-user-times ml-2"></i></a></td>
                         </div>
-
                     </tr>
                     </tbody>
                 </table>

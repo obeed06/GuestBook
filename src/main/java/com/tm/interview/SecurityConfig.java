@@ -28,7 +28,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                         "/img/**",
                         "/webjars/**").permitAll()
                 .antMatchers("/guestbook/delete/**").hasRole("ADMIN")
+                .antMatchers("/guestbook/update/**").hasRole("ADMIN")
+                .antMatchers("/guestbook/edit/**").hasRole("ADMIN")
+                .antMatchers("/guestbook/approve/**").hasRole("ADMIN")
                 .antMatchers("/guestbook/save/**").hasAnyRole("USER","ADMIN")
+                .antMatchers("/guestbook/add/**").hasAnyRole("USER","ADMIN")
                 .and()
                 .formLogin()
                 .permitAll()

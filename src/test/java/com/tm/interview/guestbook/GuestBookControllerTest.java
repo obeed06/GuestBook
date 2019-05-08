@@ -98,28 +98,23 @@ class GuestBookControllerTest {
     @WithMockUser(username = "admin", roles = "ADMIN")
     @Test
     void whenUserWithRoleAdminTriesToSave_thenReturns302() throws Exception {
-        GuestBookEntry entry = GuestBookEntry.builder()
-                .name("name")
-                .message("message").build();
-
         mvc.perform(post("/guestbook/save")
-                .content(objectMapper.writeValueAsString(entry))
-                .with(csrf())
-                .contentType(MediaType.APPLICATION_JSON))
+                .contentType(MediaType.APPLICATION_FORM_URLENCODED)
+                .param("name", "name")
+                .param("message", "message")
+                .with(csrf()))
                 .andExpect(status().is3xxRedirection());
     }
 
     @WithMockUser(username = "user", roles = "USER")
     @Test
     void whenUserWithRoleUserTriesToSave_thenReturns302() throws Exception {
-        GuestBookEntry entry = GuestBookEntry.builder()
-                .name("name")
-                .message("message").build();
 
         mvc.perform(post("/guestbook/save")
-                .content(objectMapper.writeValueAsString(entry))
-                .with(csrf())
-                .contentType(MediaType.APPLICATION_JSON))
+                .contentType(MediaType.APPLICATION_FORM_URLENCODED)
+                .param("name", "name")
+                .param("message", "message")
+                .with(csrf()))
                 .andExpect(status().is3xxRedirection());
     }
 }

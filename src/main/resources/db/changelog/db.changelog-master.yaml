@@ -31,3 +31,16 @@ databaseChangeLog:
               - column:
                   name: created_date
                   type: date
+  - changeSet:
+      id: addColumn-approve
+      author: obee
+      changes:
+      - addColumn:
+              tableName: entry
+              columns:
+              - column:
+                    name: approved
+                    type: boolean
+                    defaultValueBoolean: false
+
+                    

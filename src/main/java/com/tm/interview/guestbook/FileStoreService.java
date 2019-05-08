@@ -9,7 +9,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 
 @Service
-public class FileStoreService {
+class FileStoreService {
 
     private static String uploadDirectory = System.getProperty("user.dir")+"/uploads";
 
@@ -23,7 +23,7 @@ public class FileStoreService {
     }
 
     String saveFile(MultipartFile image) throws IOException {
-        if(image == null) return null;
+        if(image == null || image.isEmpty()) return null;
 
         Path fileNameAndPath = Paths.get(uploadDirectory, image.getOriginalFilename());
         Files.write(fileNameAndPath, image.getBytes());

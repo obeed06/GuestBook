@@ -28,6 +28,8 @@ class GuestBookEntry {
     @NotBlank(message = "Message is mandatory")
     private String message;
 
+    private boolean approved;
+
     @CreatedDate
     @CreationTimestamp
     @Column(name = "created_date")
