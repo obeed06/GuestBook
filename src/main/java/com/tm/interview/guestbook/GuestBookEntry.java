@@ -1,23 +1,21 @@
 package com.tm.interview.guestbook;
 
-import lombok.Builder;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
-import java.sql.Blob;
 import java.util.Date;
 
 @Entity
+@Data
 @Builder
-@Getter
-@Setter
+@AllArgsConstructor
+@NoArgsConstructor
 @Table(name = "entry")
-public class GuestBookEntry {
+class GuestBookEntry {
 
     @Id
     private long id;

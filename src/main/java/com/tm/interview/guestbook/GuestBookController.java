@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -28,6 +29,7 @@ public class GuestBookController {
         model.addAttribute("entries", StreamSupport.stream(entries.spliterator(), false).count() > 0 ? entries : null);
         return "index";
     }
+
     @RequestMapping(path = "/guestbook/add", method = RequestMethod.GET)
     public String createEntry(Model model) {
         model.addAttribute("entry", GuestBookEntry.builder().build());
@@ -35,7 +37,7 @@ public class GuestBookController {
     }
 
     @RequestMapping(path = "/guestbook/save", method = RequestMethod.POST)
-    public String save(@Valid GuestBookEntry entry, BindingResult result, Model model) {
+    public String save(@RequestBody @Valid GuestBookEntry entry, BindingResult result, Model model) {
         if(result.hasErrors()) {
             model.addAttribute("entry", entry);
             return "add-entry";

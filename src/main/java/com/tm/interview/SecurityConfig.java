@@ -28,7 +28,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                         "/img/**",
                         "/webjars/**").permitAll()
                 .antMatchers("/guestbook/delete/**").hasRole("ADMIN")
-                .anyRequest().authenticated()
+                .antMatchers("/guestbook/save/**").hasAnyRole("USER","ADMIN")
                 .and()
                 .formLogin()
                 .permitAll()
@@ -50,7 +50,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .roles("USER")
                 .and()
                 .withUser("admin")
-                .password(passwordEncoder().encode("admin"))
+                .password(passwordEncoder().encode("password"))
                 .roles("ADMIN");
     }
 
